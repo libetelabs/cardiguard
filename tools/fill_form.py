@@ -4,7 +4,7 @@
 
 양식의 내용 컨트롤(sdt)은 비어 있고, 실제 글은 각 항목 문단 **뒤에 이어지는 본문 문단**에
 들어간다. 그래서 컨트롤을 건드리지 않고 그 문단 뒤에 문단을 끼워 넣는다.
-표는 Word 표로 만들지 않고 "머리 — 값" 꼴의 줄로 편다. 심사자가 읽는 데 지장이 없고,
+표는 Word 표로 만들지 않고 "머리: 값" 꼴의 줄로 편다. 심사자가 읽는 데 지장이 없고,
 양식의 서식을 건드리지 않는 쪽이 안전하다.
 """
 import html
@@ -34,7 +34,7 @@ def parse(md: str) -> dict[int, list[str]]:
         if line.startswith("---") or line.startswith(">"):
             continue
         if not line:
-            # 빈 줄은 문단 경계다. 이어 붙이지 않는다. 표도 여기서 끝난다 —
+            # 빈 줄은 문단 경계다. 이어 붙이지 않는다. 표도 여기서 끝난다.
             # 머리행을 남겨 두면 다음 표의 머리행이 앞 표의 데이터 행으로 먹힌다.
             pending_head = []
             if buf and buf[-1] != "":
@@ -51,7 +51,7 @@ def parse(md: str) -> dict[int, list[str]]:
             # 빈 칸을 버리면 안 된다. 머리글 첫 칸이 비는 표(| | A | B |)에서 칸이
             # 한 자리씩 밀려 마지막 열이 통째로 떨어지고, 행 이름이 옆 열의 머리글을
             # 달고 나온다. 「원인 / 현재: 없음 / 카디가드: ...」가
-            # 「현재: 원인 / 카디가드: 없음」이 됐다 — 뜻이 거꾸로다.
+            # 「현재: 원인 / 카디가드: 없음」이 됐다: 뜻이 거꾸로다.
             if not any(cells):
                 continue
             if not pending_head:                 # 표 머리행
@@ -126,6 +126,6 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as zout:
         data = doc.encode("utf-8") if item.filename == "word/document.xml" else zin.read(item.filename)
         zout.writestr(item, data)
 
-print(f"{OUT} — 채운 항목 {sum(1 for i in range(1, 9) if sections.get(i))}개")
+print(f"{OUT}: 채운 항목 {sum(1 for i in range(1, 9) if sections.get(i))}개")
 for i in range(1, 9):
     print(f"  {i}. 문단 {len(sections.get(i, []))}개")

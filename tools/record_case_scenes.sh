@@ -5,7 +5,7 @@
 # 급제동 정차(원인 고르기)는 아예 없던 장면이다.
 #
 # 사용: bash tools/record_case_scenes.sh [출력디렉터리]
-#       에뮬레이터는 미리 켜 둘 것. APK 는 release — 제출본과 같아야 한다.
+#       에뮬레이터는 미리 켜 둘 것. APK 는 release: 제출본과 같아야 한다.
 set -eu
 
 ADB="${ADB:-$HOME/Library/Android/sdk/platform-tools/adb}"
@@ -60,9 +60,9 @@ echo "대상 $ANDROID_SERIAL / APK $(basename "$APK") / 장면 $ONLY"
 "$ADB" install "$APK" >/dev/null
 "$ADB" shell cmd uimode night no >/dev/null
 
-# ── 1. 급제동 정차 — 원인을 고른다 (새 장면) ──────────────────────────────
+# ── 1. 급제동 정차: 원인을 고른다 (새 장면) ──────────────────────────────
 if want brake; then
-echo "[1] 급제동 정차 — 원인 고르기"
+echo "[1] 급제동 정차: 원인 고르기"
 reset_app
 sig drive 5; sig brake 7; sig park 7
 wait_text "상대 때문" 20 || echo "  ! 원인 버튼이 안 보인다"
@@ -72,9 +72,9 @@ tap "상대 때문"
 end_rec brake-parked
 fi
 
-# ── 2. 접촉 사고 — 단계 안내와 완료 ───────────────────────────────────────
+# ── 2. 접촉 사고: 단계 안내와 완료 ───────────────────────────────────────
 if want collision; then
-echo "[2] 접촉 사고 — 단계 안내 · 완료"
+echo "[2] 접촉 사고: 단계 안내 · 완료"
 reset_app
 sig drive 5; sig brake 7; sig airbag 8; sig park 7
 wait_text "STEP 01 / 07" 20 || echo "  ! 단계 안내가 안 뜬다"
@@ -86,9 +86,9 @@ done
 end_rec collision
 fi
 
-# ── 3. 고장 정차 — 단계 안내 ──────────────────────────────────────────────
+# ── 3. 고장 정차: 단계 안내 ──────────────────────────────────────────────
 if want breakdown; then
-echo "[3] 고장 정차 — 단계 안내"
+echo "[3] 고장 정차: 단계 안내"
 reset_app
 sig drive 5; say "차가 고장났어" 8; sig park 7
 wait_text "STEP 01 / 03" 20 || echo "  ! 고장 단계가 안 뜬다"

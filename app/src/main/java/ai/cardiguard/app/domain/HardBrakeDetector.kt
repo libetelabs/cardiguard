@@ -10,7 +10,7 @@ class HardBrakeDetector(
     // 20km/h(3.7)로 두면 시내 신호와 정체에서 걸려 기록이 의미를 잃는다.
     private val minDropKmh: Float = 25f,
     private val minStartKmh: Float = 30f,
-    // 같은 제동을 두 번 세지 않기 위한 간격이다. 늘리면 안 된다 —
+    // 같은 제동을 두 번 세지 않기 위한 간격이다. 늘리면 안 된다.
     // 보복운전은 짧은 간격의 반복 급제동이라 간격을 조이면 위협 승급이 죽는다.
     private val cooldownMs: Long = 10_000,
 ) {

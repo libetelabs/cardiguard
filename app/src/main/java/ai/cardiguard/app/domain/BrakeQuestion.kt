@@ -24,7 +24,7 @@ object BrakeQuestion {
 
     /**
      * 이 주행에서 원인을 물을 급제동. 세게 밟은 순, 같으면 나중 것 먼저.
-     * 이미 답한 것은 자리를 차지한 채로 남는다 — 답했다고 다음 것을 더 묻지 않는다.
+     * 이미 답한 것은 자리를 차지한 채로 남는다: 답했다고 다음 것을 더 묻지 않는다.
      */
     fun asked(brakes: List<IncidentRecord>, limit: Int = ASK_LIMIT): List<IncidentRecord> =
         brakes.sortedWith(compareByDescending<IncidentRecord> { dropKmh(it) }.thenByDescending { it.atMs })
