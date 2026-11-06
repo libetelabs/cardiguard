@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      API 30 이하에는 시스템 스플래시가 없다. 여기서는 기본 테마를 그대로 쓴다.
+      값은 values-v31 에서만 갈라진다.
+    -->
+    <style name="Theme.Cardiguard" parent="@android:style/Theme.DeviceDefault.NoActionBar" />
+</resources>

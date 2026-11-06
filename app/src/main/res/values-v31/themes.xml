@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      안드로이드 12+ 는 런처 아이콘으로 스플래시를 자동으로 만든다. 바탕색을 정하지
+      않으면 시스템 기본 밝은 색이 깔리는데, 우리 아이콘 판도 흰색이라 흰 바탕에
+      흰 판이 겹쳐 방패만 떠 보인다. 앱 바탕색(Ink 야간값)을 그대로 쓴다.
+    -->
+    <style name="Theme.Cardiguard" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowSplashScreenBackground">#FF0F1012</item>
+    </style>
+</resources>
